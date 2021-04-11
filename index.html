@@ -49,7 +49,7 @@
             zoomControl:true, maxZoom:28, minZoom:6.5
         }).fitBounds([[47.067623673474756,1.3470576301001664],[54.99372892601061,22.236038244114958]]);
         var hash = new L.Hash(map);
-map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Data-for-Health-Map" target="_blank">Informationen, Daten und Nutzungsbedingungen                                                          </a> &middot;<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Data-for-Health" target="_blank">Informationen, Daten und Nutzungsbedingungen                                                          </a> &middot;<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
@@ -736,15 +736,15 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         bounds_group.addLayer(layer_International_4);
         cluster_International_4.addTo(map);
         map.on("zoomend", function(e) {
-            if (map.getZoom() <= 19 && map.getZoom() >= 6) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 4) {
                 map.addLayer(cluster_International_4);
-            } else if (map.getZoom() > 19 || map.getZoom() < 6) {
+            } else if (map.getZoom() > 19 || map.getZoom() < 4) {
                 map.removeLayer(cluster_International_4);
             }
         });
-            if (map.getZoom() <= 19 && map.getZoom() >= 6) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 4) {
                 map.addLayer(cluster_International_4);
-            } else if (map.getZoom() > 19 || map.getZoom() < 6) {
+            } else if (map.getZoom() > 19 || map.getZoom() < 4) {
                 map.removeLayer(cluster_International_4);
             }
             var title = new L.Control();
@@ -762,7 +762,7 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         map.on("zoomend", function(){
 
                 if (map.hasLayer(layer_International_4)) {
-                    if (map.getZoom() <= 6 && map.getZoom() >= 19) {
+                    if (map.getZoom() <= 3 && map.getZoom() >= 19) {
                         layer_International_4.eachLayer(function (layer) {
                             layer.openTooltip();
                         });
