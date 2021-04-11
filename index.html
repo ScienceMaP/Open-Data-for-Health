@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Open Data for Health Map - offene Daten im Kontext von Raum und Gesundheit</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/Bundeslnder_0.js"></script>
+        <script src="data/kommunalStdteundGemeinden_1.js"></script>
+        <script src="data/regionalBundeslnderMetropolregionen_2.js"></script>
+        <script src="data/national_3.js"></script>
+        <script src="data/International_4.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:6.5
+        }).fitBounds([[47.067623673474756,1.3470576301001664],[54.99372892601061,22.236038244114958]]);
+        var hash = new L.Hash(map);
+map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Data-for-Health-Map" target="_blank">Informationen, Daten und Nutzungsbedingungen                                                          </a> &middot;<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_Bundeslnder_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name_1'] !== null ? autolinker.link(feature.properties['name_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Bundeslnder_0_0(feature) {
+            switch(String(feature.properties['q2wHide_GOV'])) {
+                case '1':
+                    return {
+                pane: 'pane_Bundeslnder_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,171,245,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Bundeslnder_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(185,230,252,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Bundeslnder_0');
+        map.getPane('pane_Bundeslnder_0').style.zIndex = 400;
+        map.getPane('pane_Bundeslnder_0').style['mix-blend-mode'] = 'normal';
+        var layer_Bundeslnder_0 = new L.geoJson(json_Bundeslnder_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bundeslnder_0',
+            layerName: 'layer_Bundeslnder_0',
+            pane: 'pane_Bundeslnder_0',
+            onEachFeature: pop_Bundeslnder_0,
+            style: style_Bundeslnder_0_0,
+        });
+        bounds_group.addLayer(layer_Bundeslnder_0);
+        map.addLayer(layer_Bundeslnder_0);
+        function pop_kommunalStdteundGemeinden_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Website</strong><br />' + (feature.properties['URL'] !== null ? autolinker.link(feature.properties['URL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Titel</strong><br />' + (feature.properties['Titel'] !== null ? autolinker.link(feature.properties['Titel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Beschreibung</strong><br />' + (feature.properties['Beschreibung'] !== null ? autolinker.link(feature.properties['Beschreibung'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Sitz</strong><br />' + (feature.properties['Sitz'] !== null ? autolinker.link(feature.properties['Sitz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sozioökonomische, demografische Daten etc.</th>\
+                        <td>' + (feature.properties['sozioek'] !== null ? autolinker.link(feature.properties['sozioek'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Erreichbarkeit und Zugang"</th>\
+                        <td>' + (feature.properties['ereichbar_zug'] !== null ? autolinker.link(feature.properties['ereichbar_zug'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "physische Umgebung"</th>\
+                        <td>' + (feature.properties['phys'] !== null ? autolinker.link(feature.properties['phys'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Klima und Umwelt"</th>\
+                        <td>' + (feature.properties['klima_umwelt'] !== null ? autolinker.link(feature.properties['klima_umwelt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sind Geodaten vorhanden?</th>\
+                        <td>' + (feature.properties['Geodaten'] !== null ? autolinker.link(feature.properties['Geodaten'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>geprüft</strong><br />' + (feature.properties['geprüft'] !== null ? autolinker.link(feature.properties['geprüft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Nutzungsbedungungen/ Lizensierungstyp</strong><br />' + (feature.properties['Lizenz'] !== null ? autolinker.link(feature.properties['Lizenz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kommunalStdteundGemeinden_1_0(feature) {
+            switch(String(feature.properties['q2wHide_Portaltyp'])) {
+                case 'amsta':
+                    return {
+                pane: 'pane_kommunalStdteundGemeinden_1',
+                shape: 'triangle',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,0,64,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'fachda':
+                    return {
+                pane: 'pane_kommunalStdteundGemeinden_1',
+                shape: 'triangle',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(30,215,16,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,213,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'geoda':
+                    return {
+                pane: 'pane_kommunalStdteundGemeinden_1',
+                shape: 'triangle',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'odp':
+                    return {
+                pane: 'pane_kommunalStdteundGemeinden_1',
+                shape: 'triangle',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_kommunalStdteundGemeinden_1');
+        map.getPane('pane_kommunalStdteundGemeinden_1').style.zIndex = 401;
+        map.getPane('pane_kommunalStdteundGemeinden_1').style['mix-blend-mode'] = 'normal';
+        var layer_kommunalStdteundGemeinden_1 = new L.geoJson(json_kommunalStdteundGemeinden_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_kommunalStdteundGemeinden_1',
+            layerName: 'layer_kommunalStdteundGemeinden_1',
+            pane: 'pane_kommunalStdteundGemeinden_1',
+            onEachFeature: pop_kommunalStdteundGemeinden_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_kommunalStdteundGemeinden_1_0(feature));
+            },
+        });
+        var cluster_kommunalStdteundGemeinden_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_kommunalStdteundGemeinden_1.addLayer(layer_kommunalStdteundGemeinden_1);
+
+        bounds_group.addLayer(layer_kommunalStdteundGemeinden_1);
+        cluster_kommunalStdteundGemeinden_1.addTo(map);
+        function pop_regionalBundeslnderMetropolregionen_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Website</strong><br />' + (feature.properties['URL'] !== null ? autolinker.link(feature.properties['URL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Titel</strong><br />' + (feature.properties['Titel'] !== null ? autolinker.link(feature.properties['Titel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Beschreibung</strong><br />' + (feature.properties['Beschreibung'] !== null ? autolinker.link(feature.properties['Beschreibung'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Sitz</strong><br />' + (feature.properties['Sitz'] !== null ? autolinker.link(feature.properties['Sitz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sozioökonomische, demografische Daten etc.</th>\
+                        <td>' + (feature.properties['sozioek'] !== null ? autolinker.link(feature.properties['sozioek'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Erreichbarkeit und Zugang"</th>\
+                        <td>' + (feature.properties['ereichbar_zug'] !== null ? autolinker.link(feature.properties['ereichbar_zug'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "physische Umgebung"</th>\
+                        <td>' + (feature.properties['phys'] !== null ? autolinker.link(feature.properties['phys'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Klima und Umwelt"</th>\
+                        <td>' + (feature.properties['klima_umwelt'] !== null ? autolinker.link(feature.properties['klima_umwelt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sind Geodaten vorhanden?</th>\
+                        <td>' + (feature.properties['Geodaten'] !== null ? autolinker.link(feature.properties['Geodaten'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>geprüft</strong><br />' + (feature.properties['geprüft'] !== null ? autolinker.link(feature.properties['geprüft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Nutzungsbedungungen/ Lizensierungstyp</strong><br />' + (feature.properties['Lizenz'] !== null ? autolinker.link(feature.properties['Lizenz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_regionalBundeslnderMetropolregionen_2_0(feature) {
+            switch(String(feature.properties['q2wHide_Portaltyp'])) {
+                case 'amsta':
+                    return {
+                pane: 'pane_regionalBundeslnderMetropolregionen_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'fachda':
+                    return {
+                pane: 'pane_regionalBundeslnderMetropolregionen_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,160,44,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'geoda':
+                    return {
+                pane: 'pane_regionalBundeslnderMetropolregionen_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'odp':
+                    return {
+                pane: 'pane_regionalBundeslnderMetropolregionen_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(3,7,2,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_regionalBundeslnderMetropolregionen_2');
+        map.getPane('pane_regionalBundeslnderMetropolregionen_2').style.zIndex = 402;
+        map.getPane('pane_regionalBundeslnderMetropolregionen_2').style['mix-blend-mode'] = 'normal';
+        var layer_regionalBundeslnderMetropolregionen_2 = new L.geoJson(json_regionalBundeslnderMetropolregionen_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_regionalBundeslnderMetropolregionen_2',
+            layerName: 'layer_regionalBundeslnderMetropolregionen_2',
+            pane: 'pane_regionalBundeslnderMetropolregionen_2',
+            onEachFeature: pop_regionalBundeslnderMetropolregionen_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_regionalBundeslnderMetropolregionen_2_0(feature));
+            },
+        });
+        var cluster_regionalBundeslnderMetropolregionen_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_regionalBundeslnderMetropolregionen_2.addLayer(layer_regionalBundeslnderMetropolregionen_2);
+
+        bounds_group.addLayer(layer_regionalBundeslnderMetropolregionen_2);
+        cluster_regionalBundeslnderMetropolregionen_2.addTo(map);
+        function pop_national_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Website</strong><br />' + (feature.properties['URL'] !== null ? autolinker.link(feature.properties['URL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Titel</strong><br />' + (feature.properties['Titel'] !== null ? autolinker.link(feature.properties['Titel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Beschreibung</strong><br />' + (feature.properties['Beschreibung'] !== null ? autolinker.link(feature.properties['Beschreibung'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Sitz</strong><br />' + (feature.properties['Sitz'] !== null ? autolinker.link(feature.properties['Sitz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sozioökonomische, demografische Daten etc.</th>\
+                        <td>' + (feature.properties['sozioek'] !== null ? autolinker.link(feature.properties['sozioek'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Erreichbarkeit und Zugang"</th>\
+                        <td>' + (feature.properties['ereichbar_zug'] !== null ? autolinker.link(feature.properties['ereichbar_zug'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "physische Umgebung"</th>\
+                        <td>' + (feature.properties['phys'] !== null ? autolinker.link(feature.properties['phys'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Klima und Umwelt"</th>\
+                        <td>' + (feature.properties['klima_umwelt'] !== null ? autolinker.link(feature.properties['klima_umwelt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sind Geodaten vorhanden?</th>\
+                        <td>' + (feature.properties['Geodaten'] !== null ? autolinker.link(feature.properties['Geodaten'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>geprüft</strong><br />' + (feature.properties['geprüft'] !== null ? autolinker.link(feature.properties['geprüft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Nutzungsbedungungen/ Lizensierungstyp</strong><br />' + (feature.properties['Lizenz'] !== null ? autolinker.link(feature.properties['Lizenz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_national_3_0(feature) {
+            switch(String(feature.properties['q2wHide_Portaltyp'])) {
+                case 'amsta':
+                    return {
+                pane: 'pane_national_3',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'fachda':
+                    return {
+                pane: 'pane_national_3',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(51,160,44,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,160,44,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'geoda':
+                    return {
+                pane: 'pane_national_3',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'odp':
+                    return {
+                pane: 'pane_national_3',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_national_3');
+        map.getPane('pane_national_3').style.zIndex = 403;
+        map.getPane('pane_national_3').style['mix-blend-mode'] = 'normal';
+        var layer_national_3 = new L.geoJson(json_national_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_national_3',
+            layerName: 'layer_national_3',
+            pane: 'pane_national_3',
+            onEachFeature: pop_national_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_national_3_0(feature));
+            },
+        });
+        var cluster_national_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_national_3.addLayer(layer_national_3);
+
+        bounds_group.addLayer(layer_national_3);
+        cluster_national_3.addTo(map);
+        function pop_International_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Website</strong><br />' + (feature.properties['URL'] !== null ? autolinker.link(feature.properties['URL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Titel</strong><br />' + (feature.properties['Titel'] !== null ? autolinker.link(feature.properties['Titel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Beschreibung</strong><br />' + (feature.properties['Beschreibung'] !== null ? autolinker.link(feature.properties['Beschreibung'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Sitz</strong><br />' + (feature.properties['Sitz'] !== null ? autolinker.link(feature.properties['Sitz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sozioökonomische, demografische Daten etc.</th>\
+                        <td>' + (feature.properties['sozioek'] !== null ? autolinker.link(feature.properties['sozioek'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Erreichbarkeit und Zugang"</th>\
+                        <td>' + (feature.properties['ereichbar_zug'] !== null ? autolinker.link(feature.properties['ereichbar_zug'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "physische Umgebung"</th>\
+                        <td>' + (feature.properties['phys'] !== null ? autolinker.link(feature.properties['phys'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Daten im Kontext "Klima und Umwelt"</th>\
+                        <td>' + (feature.properties['klima_umwelt'] !== null ? autolinker.link(feature.properties['klima_umwelt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sind Geodaten vorhanden?</th>\
+                        <td>' + (feature.properties['Geodaten'] !== null ? autolinker.link(feature.properties['Geodaten'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>geprüft</strong><br />' + (feature.properties['geprüft'] !== null ? autolinker.link(feature.properties['geprüft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Nutzungsbedungungen/ Lizensierungstyp</strong><br />' + (feature.properties['Lizenz'] !== null ? autolinker.link(feature.properties['Lizenz'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_International_4_0(feature) {
+            switch(String(feature.properties['q2wHide_Portaltyp'])) {
+                case 'amsta':
+                    return {
+                pane: 'pane_International_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'fachda':
+                    return {
+                pane: 'pane_International_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,160,44,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'geoda':
+                    return {
+                pane: 'pane_International_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'odp':
+                    return {
+                pane: 'pane_International_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(3,7,2,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_International_4');
+        map.getPane('pane_International_4').style.zIndex = 404;
+        map.getPane('pane_International_4').style['mix-blend-mode'] = 'normal';
+        var layer_International_4 = new L.geoJson(json_International_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_International_4',
+            layerName: 'layer_International_4',
+            pane: 'pane_International_4',
+            onEachFeature: pop_International_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_International_4_0(feature));
+            },
+        });
+        var cluster_International_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_International_4.addLayer(layer_International_4);
+
+        bounds_group.addLayer(layer_International_4);
+        cluster_International_4.addTo(map);
+        map.on("zoomend", function(e) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 6) {
+                map.addLayer(cluster_International_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 6) {
+                map.removeLayer(cluster_International_4);
+            }
+        });
+            if (map.getZoom() <= 19 && map.getZoom() >= 6) {
+                map.addLayer(cluster_International_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 6) {
+                map.removeLayer(cluster_International_4);
+            }
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Open Data for Health Map - offene Daten im Kontext von Raum und Gesundheit</h2>';
+            };
+            title.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'International<br /><table><tr><td style="text-align: center;"><img src="legend/International_4_PortalfüramtlicheDaten0.png" /></td><td>Portal für amtliche Daten</td></tr><tr><td style="text-align: center;"><img src="legend/International_4_FachdatenportalzBUmweltKlima1.png" /></td><td>Fachdatenportal (z.B. Umwelt, Klima)</td></tr><tr><td style="text-align: center;"><img src="legend/International_4_Geodatenportal2.png" /></td><td>Geodatenportal</td></tr><tr><td style="text-align: center;"><img src="legend/International_4_OpendataportaloderRessource3.png" /></td><td>Opendataportal oder -Ressource</td></tr></table>': cluster_International_4,'national<br /><table><tr><td style="text-align: center;"><img src="legend/national_3_PortalfüramtlicheDaten0.png" /></td><td>Portal für amtliche Daten</td></tr><tr><td style="text-align: center;"><img src="legend/national_3_FachdatenportalzBUmweltKlima1.png" /></td><td>Fachdatenportal (z.B. Umwelt, Klima)</td></tr><tr><td style="text-align: center;"><img src="legend/national_3_Geodatenportal2.png" /></td><td>Geodatenportal</td></tr><tr><td style="text-align: center;"><img src="legend/national_3_OpendataportaloderRessource3.png" /></td><td>Opendataportal oder -Ressource</td></tr></table>': cluster_national_3,'regional (Bundesländer, Metropolregionen)<br /><table><tr><td style="text-align: center;"><img src="legend/regionalBundeslnderMetropolregionen_2_PortalfüramtlicheDaten0.png" /></td><td>Portal für amtliche Daten</td></tr><tr><td style="text-align: center;"><img src="legend/regionalBundeslnderMetropolregionen_2_FachdatenportalzBUmweltKlima1.png" /></td><td>Fachdatenportal (z.B. Umwelt, Klima)</td></tr><tr><td style="text-align: center;"><img src="legend/regionalBundeslnderMetropolregionen_2_Geodatenportal2.png" /></td><td>Geodatenportal</td></tr><tr><td style="text-align: center;"><img src="legend/regionalBundeslnderMetropolregionen_2_OpendataportaloderRessource3.png" /></td><td>Opendataportal oder -Ressource</td></tr></table>': cluster_regionalBundeslnderMetropolregionen_2,'kommunal (Städte und Gemeinden)<br /><table><tr><td style="text-align: center;"><img src="legend/kommunalStdteundGemeinden_1_PortalfüramtlicheDaten0.png" /></td><td>Portal für amtliche Daten</td></tr><tr><td style="text-align: center;"><img src="legend/kommunalStdteundGemeinden_1_FachdatenportalzBUmweltKlima1.png" /></td><td>Fachdatenportal (z.B. Umwelt, Klima)</td></tr><tr><td style="text-align: center;"><img src="legend/kommunalStdteundGemeinden_1_Geodatenportal2.png" /></td><td>Geodatenportal</td></tr><tr><td style="text-align: center;"><img src="legend/kommunalStdteundGemeinden_1_OpendataportaloderRessource3.png" /></td><td>Opendataportal oder -Ressource</td></tr></table>': cluster_kommunalStdteundGemeinden_1,'Bundesländer<br /><table><tr><td style="text-align: center;"><img src="legend/Bundeslnder_0_BLinGOVdatadeenthalten0.png" /></td><td>BL in GOVdata.de enthalten</td></tr><tr><td style="text-align: center;"><img src="legend/Bundeslnder_0_BLdieGOVdatadenichtbegetretensind1.png" /></td><td>BL, die GOVdata.de nicht begetreten sind</td></tr></table>': layer_Bundeslnder_0,},{collapsed:false}).addTo(map);
+        map.on("zoomend", function(){
+
+                if (map.hasLayer(layer_International_4)) {
+                    if (map.getZoom() <= 6 && map.getZoom() >= 19) {
+                        layer_International_4.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_International_4.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        });
+        setBounds();
+        var i = 0;
+        layer_International_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Titel'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Titel']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_International_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+                if (map.hasLayer(layer_International_4)) {
+                    if (map.getZoom() <= 3 && map.getZoom() >= 19) {
+                        layer_International_4.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_International_4.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        resetLabels([layer_kommunalStdteundGemeinden_1,layer_regionalBundeslnderMetropolregionen_2,layer_national_3,layer_International_4]);
+        map.on("zoomend", function(){
+            resetLabels([layer_kommunalStdteundGemeinden_1,layer_regionalBundeslnderMetropolregionen_2,layer_national_3,layer_International_4]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_kommunalStdteundGemeinden_1,layer_regionalBundeslnderMetropolregionen_2,layer_national_3,layer_International_4]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_kommunalStdteundGemeinden_1,layer_regionalBundeslnderMetropolregionen_2,layer_national_3,layer_International_4]);
+        });
+        </script>
+    </body>
+</html>
