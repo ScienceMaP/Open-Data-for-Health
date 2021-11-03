@@ -40,33 +40,16 @@
         <script src="data/national_3.js"></script>
         <script src="data/International_4.js"></script>
         <script>
-        var highlightLayer;
-        function highlightFeature(e) {
-            highlightLayer = e.target;
-            highlightLayer.openPopup();
-        }
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:6.5
-        }).fitBounds([[47.067623673474756,1.3470576301001664],[54.99372892601061,22.236038244114958]]);
+            zoomControl:true, maxZoom:28, minZoom:6
+        }).fitBounds([[48.32639090234016,2.3093435255970673],[55.06964358296872,20.327158769423278]]);
         var hash = new L.Hash(map);
-map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Data-for-Health" target="_blank">Informationen, Daten und Nutzungsbedingungen                                                          </a> &middot;<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Data-for-Health" target="_blank">Informationen, Daten und Nutzungsbedingungen                                                          </a> &middot;<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
         function pop_Bundeslnder_0(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['name_1'] !== null ? autolinker.link(feature.properties['name_1'].toLocaleString()) : '') + '</td>\
@@ -124,18 +107,6 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         bounds_group.addLayer(layer_Bundeslnder_0);
         map.addLayer(layer_Bundeslnder_0);
         function pop_kommunalStdteundGemeinden_1(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
@@ -279,18 +250,6 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         bounds_group.addLayer(layer_kommunalStdteundGemeinden_1);
         cluster_kommunalStdteundGemeinden_1.addTo(map);
         function pop_regionalBundeslnderMetropolregionen_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
@@ -430,18 +389,6 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         bounds_group.addLayer(layer_regionalBundeslnderMetropolregionen_2);
         cluster_regionalBundeslnderMetropolregionen_2.addTo(map);
         function pop_national_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
@@ -585,18 +532,6 @@ map.attributionControl.setPrefix('<a href="https://github.com/ScienceMaP/Open-Da
         bounds_group.addLayer(layer_national_3);
         cluster_national_3.addTo(map);
         function pop_International_4(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Reichweite</strong><br />' + (feature.properties['Reichweite'] !== null ? autolinker.link(feature.properties['Reichweite'].toLocaleString()) : '') + '</td>\
